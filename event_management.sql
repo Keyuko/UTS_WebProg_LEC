@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 24, 2024 at 11:37 AM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- Waktu pembuatan: 25 Okt 2024 pada 09.26
+-- Versi server: 10.4.32-MariaDB
+-- Versi PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `events`
+-- Struktur dari tabel `events`
 --
 
 CREATE TABLE `events` (
@@ -38,12 +38,19 @@ CREATE TABLE `events` (
   `banner` varchar(255) DEFAULT NULL,
   `status` enum('open','closed','canceled') DEFAULT 'open',
   `partisipan_terdaftar` int(11) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `events`
+--
+
+INSERT INTO `events` (`id`, `nama`, `tanggal`, `waktu`, `lokasi`, `deskripsi`, `max_partisipan`, `banner`, `status`, `partisipan_terdaftar`) VALUES
+(26, 'MPL', '2024-10-25', '18:00:00', 'Jakarta', 'Week 1 Playoff', 20, '../uploads/mpl-id-season-12-jadwal-hadiah-tim-dan-format-pertandingan-1_169.jpeg', 'open', 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `event_registrations`
+-- Struktur dari tabel `event_registrations`
 --
 
 CREATE TABLE `event_registrations` (
@@ -53,12 +60,19 @@ CREATE TABLE `event_registrations` (
   `event_id` int(6) UNSIGNED NOT NULL,
   `registration_date` datetime DEFAULT current_timestamp(),
   `email_user` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `event_registrations`
+--
+
+INSERT INTO `event_registrations` (`id`, `user_id`, `username`, `event_id`, `registration_date`, `email_user`) VALUES
+(47, 1021, 'User1', 26, '2024-10-25 14:25:21', 'user1@gmail.com');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `login_admin`
+-- Struktur dari tabel `login_admin`
 --
 
 CREATE TABLE `login_admin` (
@@ -67,12 +81,19 @@ CREATE TABLE `login_admin` (
   `password` varchar(255) DEFAULT NULL,
   `email_admin` varchar(100) DEFAULT NULL,
   `birthdate_admin` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `login_admin`
+--
+
+INSERT INTO `login_admin` (`id`, `nama`, `password`, `email_admin`, `birthdate_admin`) VALUES
+(14, 'Admin', '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9', 'admin@gmail.com', '2024-10-10');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `login_user`
+-- Struktur dari tabel `login_user`
 --
 
 CREATE TABLE `login_user` (
@@ -81,12 +102,20 @@ CREATE TABLE `login_user` (
   `password` varchar(255) DEFAULT NULL,
   `email_user` varchar(100) DEFAULT NULL,
   `birthdate_user` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `login_user`
+--
+
+INSERT INTO `login_user` (`id`, `username`, `password`, `email_user`, `birthdate_user`) VALUES
+(1021, 'User1', '4207c9d87332b061e2d516ca4f9b5f5493b58d1e90a0a4a2e4e60e385c5201a2', 'user1@gmail.com', '2024-10-10'),
+(1022, 'User2', 'f9094f5a79555b5b02394b0572b89baa28df6ca30a0738c7743b50187634fe38', 'user2@gmail.com', '2024-10-10');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `registrations`
+-- Struktur dari tabel `registrations`
 --
 
 CREATE TABLE `registrations` (
@@ -94,21 +123,21 @@ CREATE TABLE `registrations` (
   `event_id` int(6) UNSIGNED DEFAULT NULL,
   `nama` varchar(100) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `secret_keys`
+-- Struktur dari tabel `secret_keys`
 --
 
 CREATE TABLE `secret_keys` (
   `id` int(11) NOT NULL,
   `key_value` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `secret_keys`
+-- Dumping data untuk tabel `secret_keys`
 --
 
 INSERT INTO `secret_keys` (`id`, `key_value`) VALUES
@@ -119,13 +148,13 @@ INSERT INTO `secret_keys` (`id`, `key_value`) VALUES
 --
 
 --
--- Indexes for table `events`
+-- Indeks untuk tabel `events`
 --
 ALTER TABLE `events`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `event_registrations`
+-- Indeks untuk tabel `event_registrations`
 --
 ALTER TABLE `event_registrations`
   ADD PRIMARY KEY (`id`),
@@ -133,7 +162,7 @@ ALTER TABLE `event_registrations`
   ADD KEY `event_id` (`event_id`);
 
 --
--- Indexes for table `login_admin`
+-- Indeks untuk tabel `login_admin`
 --
 ALTER TABLE `login_admin`
   ADD PRIMARY KEY (`id`),
@@ -141,7 +170,7 @@ ALTER TABLE `login_admin`
   ADD UNIQUE KEY `email` (`email_admin`);
 
 --
--- Indexes for table `login_user`
+-- Indeks untuk tabel `login_user`
 --
 ALTER TABLE `login_user`
   ADD PRIMARY KEY (`id`),
@@ -149,64 +178,64 @@ ALTER TABLE `login_user`
   ADD UNIQUE KEY `email_user` (`email_user`);
 
 --
--- Indexes for table `registrations`
+-- Indeks untuk tabel `registrations`
 --
 ALTER TABLE `registrations`
   ADD PRIMARY KEY (`id`),
   ADD KEY `event_id` (`event_id`);
 
 --
--- Indexes for table `secret_keys`
+-- Indeks untuk tabel `secret_keys`
 --
 ALTER TABLE `secret_keys`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `events`
+-- AUTO_INCREMENT untuk tabel `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
--- AUTO_INCREMENT for table `event_registrations`
+-- AUTO_INCREMENT untuk tabel `event_registrations`
 --
 ALTER TABLE `event_registrations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
--- AUTO_INCREMENT for table `login_admin`
+-- AUTO_INCREMENT untuk tabel `login_admin`
 --
 ALTER TABLE `login_admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- AUTO_INCREMENT for table `login_user`
+-- AUTO_INCREMENT untuk tabel `login_user`
 --
 ALTER TABLE `login_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1021;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1023;
 
 --
--- AUTO_INCREMENT for table `registrations`
+-- AUTO_INCREMENT untuk tabel `registrations`
 --
 ALTER TABLE `registrations`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `event_registrations`
+-- Ketidakleluasaan untuk tabel `event_registrations`
 --
 ALTER TABLE `event_registrations`
   ADD CONSTRAINT `event_registrations_ibfk_2` FOREIGN KEY (`event_id`) REFERENCES `events` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `registrations`
+-- Ketidakleluasaan untuk tabel `registrations`
 --
 ALTER TABLE `registrations`
   ADD CONSTRAINT `registrations_ibfk_1` FOREIGN KEY (`event_id`) REFERENCES `events` (`id`) ON DELETE CASCADE;
