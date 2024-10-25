@@ -139,6 +139,8 @@ if ($result->num_rows === 0 && !empty($search)) {
                 const dropdown = document.getElementById('profileDropdown');
                 dropdown.classList.toggle('hidden');
             }
+
+            
         </script>
 </body>
 

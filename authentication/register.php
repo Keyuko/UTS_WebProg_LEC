@@ -100,6 +100,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['email_user'] = $email;
             header('Location: login.php');
             exit;
+        } else {
+            echo "<script>alert('$result');</script>";
+            echo "<script>window.location.href ='register.php';</script>";
+            exit;
         }
     } else {
         $username = $_POST['username'];
@@ -120,10 +124,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['email_user'] = $user['email_user'];
             header('Location: login.php');
             exit;
+        } else {
+            echo "<script>alert('Username or email already taken');</script>";
+            echo "<script>window.location.href = 'register.php';</script>";
+            exit;
         }
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -140,8 +149,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="bg-white shadow-md rounded-lg p-8 max-w-lg w-full space-y-6">
         <h1 class="text-2xl font-bold text-center mb-4">Register</h1>
         <div class="text-center mb-4 space-x-4">
-            <button onclick="toggleForms('admin')" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring">Register as Admin</button>
-            <button onclick="toggleForms('user')" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 focus:outline-none focus:ring">Register as User</button>
+            <button onclick="toggleForms('admin')"
+                class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring">Register
+                as Admin</button>
+            <button onclick="toggleForms('user')"
+                class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 focus:outline-none focus:ring">Register
+                as User</button>
         </div>
 
         <!-- Admin Registration Form -->
@@ -150,26 +163,41 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <input type="hidden" name="register_type" value="admin" />
                 <div>
                     <label for="adminName" class="block text-sm font-medium text-gray-700">Name</label>
-                    <input type="text" name="name" id="adminName" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required />
+                    <input type="text" name="name" id="adminName"
+                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                        required />
                 </div>
                 <div>
                     <label for="adminEmail" class="block text-sm font-medium text-gray-700">Email</label>
-                    <input type="email" name="email" id="adminEmail" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required />
+                    <input type="email" name="email" id="adminEmail"
+                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                        required />
                 </div>
                 <div>
                     <label for="adminPassword" class="block text-sm font-medium text-gray-700">Password</label>
-                    <input type="password" name="password" id="adminPassword" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required />
+                    <input type="password" name="password" id="adminPassword"
+                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                        required />
                 </div>
                 <div>
                     <label for="adminBirthdate" class="block text-sm font-medium text-gray-700">Birthdate</label>
-                    <input type="date" name="birthdate" id="adminBirthdate" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 mb-4" required />
+                    <input type="date" name="birthdate" id="adminBirthdate"
+                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 mb-4"
+                        required />
                 </div>
                 <div>
                     <label for="adminSecretKey" class="block text-sm font-medium text-gray-700">Secret Key</label>
-                    <input type="text" name="secret_key" id="adminSecretKey" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required />
+                    <input type="text" name="secret_key" id="adminSecretKey"
+                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                        required />
                 </div>
-                <button type="submit" class="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 mt-4">Register Admin</button>
+                <button type="submit"
+                    class="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 mt-4">Register
+                    Admin</button>
             </form>
+            <div>
+                <a href="login.php" class="text-blue-500">Already have an account?</a>
+            </div>
         </div>
 
         <div id="userForm" class="space-y-4 hidden">
@@ -177,22 +205,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <input type="hidden" name="register_type" value="user" />
                 <div>
                     <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
-                    <input type="text" name="username" id="username" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required />
+                    <input type="text" name="username" id="username"
+                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                        required />
                 </div>
                 <div>
                     <label for="userEmail" class="block text-sm font-medium text-gray-700">Email</label>
-                    <input type="email" name="email" id="userEmail" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required />
+                    <input type="email" name="email" id="userEmail"
+                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                        required />
                 </div>
                 <div>
                     <label for="userPassword" class="block text-sm font-medium text-gray-700">Password</label>
-                    <input type="password" name="password" id="userPassword" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required />
+                    <input type="password" name="password" id="userPassword"
+                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                        required />
                 </div>
                 <div>
                     <label for="userBirthdate" class="block text-sm font-medium text-gray-700">Birthdate</label>
-                    <input type="date" name="birthdate" id="userBirthdate" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 mb-4" required />
+                    <input type="date" name="birthdate" id="userBirthdate"
+                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 mb-4"
+                        required />
                 </div>
-                <button type="submit" class="w-full px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 mt-4">Register User</button>
+                <button type="submit"
+                    class="w-full px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 mt-4">Register
+                    User</button>
             </form>
+            <div>
+                <a href="login.php" class="text-blue-500">Already have an account?</a>
+            </div>
         </div>
     </div>
 </body>
@@ -202,7 +243,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         document.getElementById('userForm').classList.toggle('hidden', formType !== 'user');
     }
 
-    window.onload = function() {
+    window.onload = function () {
         toggleForms('user');
     };
 </script>

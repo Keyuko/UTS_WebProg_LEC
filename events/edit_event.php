@@ -57,6 +57,11 @@ if (isset($_POST['update'])) {
     <div class="container mx-auto p-8">
         <h1 class="text-2xl font-bold mb-6">Edit Event</h1>
         <form action="" method="POST" enctype="multipart/form-data" class="bg-white p-6 rounded-lg shadow-md">
+        <div class="mb-4">
+    <a href="../admin/admin_dashboard.php" class="inline-block bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-600 transition duration-300">
+        Back
+    </a>
+</div>
             <div class="mb-4">
                 <label for="nama" class="block text-sm font-medium text-gray-700">Nama Event</label>
                 <input type="text" name="nama" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" value="<?= htmlspecialchars($event['nama']) ?>">
