@@ -10,6 +10,20 @@ $sql = "
     GROUP BY e.id
 ";
 $result = $conn->query($sql);
+// Pengecekan status dari query string
+if (isset($_GET['status'])) {
+    if ($_GET['status'] == 'event_added') {
+        echo "<div id='notification' class='fixed bottom-4 right-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded shadow-lg' role='alert'>
+                <strong class='font-bold'>Success!</strong>
+                <span class='block sm:inline'>Event added successfully.</span>
+              </div>";
+    } elseif ($_GET['status'] == 'event_deleted') {
+        echo "<div id='notification' class='fixed bottom-4 right-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded shadow-lg' role='alert'>
+                <strong class='font-bold'>Success!</strong>
+                <span class='block sm:inline'>Event deleted successfully.</span>
+              </div>";
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -22,6 +36,30 @@ $result = $conn->query($sql);
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.0/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <style>
+    #notification {
+        animation: slide-in 0.5s ease-out, fade-out 0.5s ease-in 4.5s;
+        opacity: 1;
+    }
+
+    @keyframes slide-in {
+        from {
+        transform: translateX(100%);
+        }
+        to {
+        transform: translateX(0);
+        }
+    }
+
+    @keyframes fade-out {
+        from {
+        opacity: 1;
+        }
+        to {
+        opacity: 0;
+        }
+    }
+    </style>
 </head>
 
 <body class="bg-gray-100 font-sans">
@@ -147,6 +185,15 @@ $result = $conn->query($sql);
             }
         }
     };
+</script>
+<script>
+  // Fungsi untuk menghapus notifikasi setelah 5 detik
+  setTimeout(function() {
+      var notification = document.getElementById('notification');
+      if (notification) {
+          notification.style.display = 'none';
+      }
+  }, 5000); // 5000 milidetik = 5 detik
 </script>
 </body>
 </html>

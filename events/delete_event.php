@@ -8,8 +8,12 @@ $id = $_GET['id'];
 $sql = "DELETE FROM events WHERE id = $id";
 
 if ($conn->query($sql) === TRUE) {
-    header("Location: ../admin/admin_dashboard.php");
+    // Redirect with success status
+    header("Location: ../admin/admin_dashboard.php?status=event_deleted");
     exit();
 } else {
     echo "Error deleting record: " . $conn->error;
 }
+
+$conn->close();
+?>
