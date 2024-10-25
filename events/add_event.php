@@ -3,7 +3,6 @@ include '../database/db.php';
 require '../authentication/authentication.php';
 checkAuth('admin');
 
-// Check if form is submitted before any HTML output
 if (isset($_POST['submit'])) {
     $nama = $_POST['nama'];
     $tanggal = $_POST['tanggal'];
@@ -38,7 +37,6 @@ if (isset($_POST['submit'])) {
             VALUES ('$nama', '$tanggal', '$waktu', '$lokasi', '$deskripsi', '$max_partisipan', '$banner')";
 
     if ($conn->query($sql) === TRUE) {
-        // Redirect with success status
         header("Location: ../admin/admin_dashboard.php?status=event_added");
         exit();
     } else {

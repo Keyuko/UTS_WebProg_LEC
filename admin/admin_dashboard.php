@@ -10,7 +10,6 @@ $sql = "
     GROUP BY e.id
 ";
 $result = $conn->query($sql);
-// Pengecekan status dari query string
 if (isset($_GET['status'])) {
     if ($_GET['status'] == 'event_added') {
         echo "<div id='notification' class='fixed bottom-4 right-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded shadow-lg' role='alert'>
@@ -187,13 +186,12 @@ if (isset($_GET['status'])) {
     };
 </script>
 <script>
-  // Fungsi untuk menghapus notifikasi setelah 5 detik
   setTimeout(function() {
       var notification = document.getElementById('notification');
       if (notification) {
           notification.style.display = 'none';
       }
-  }, 5000); // 5000 milidetik = 5 detik
+  }, 5000);
 </script>
 </body>
 </html>
